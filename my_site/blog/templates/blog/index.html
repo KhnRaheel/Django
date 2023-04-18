@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{%  load static %}
+
+ {%block title%}
+  My Blog
+ {%endblock%}
+ {%block css_files%}
+  <link rel= "stylesheet" href="{% static "blog/index.css" %}"/>
+  <link rel ="stylesheet" href="{%static "blog/post.css"%}"/>
+ {%endblock%}
+ 
+
+  {%block content%}
+   
+   <section id = 'welcome'>
+    <header>
+        <img src="{% static "blog/images/my-passport-photo.jpg"%}" alt="khan the author of this blog " />
+        <h2> khan blog </h2>
+    </header>
+    <p> hi I am khan i love to learn about tech and the world </p>
+
+
+   </section>
+   <section id = "latest-posts" >
+    <h2>My latest thoughts </h2>
+    <ul>
+        {%for post in posts%}
+           {%include "blog/includes/post.html"%} 
+        {%endfor%}
+    </ul>
+   </section>
+   <section id="about">
+    <h2>what i do </h2>
+    <p>
+        I love programming   , I love to help others , i like to lern new tech on general 
+    </p>
+    <p> my goal is to keep growing as a developer -and if i could help you do the same
+        I'd be very happy 
+    </p>
+   </section>
+   
+  {%endblock%}

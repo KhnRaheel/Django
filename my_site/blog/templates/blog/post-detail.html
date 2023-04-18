@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{%load static%}
+
+
+ {%block title%}
+  Post Setail
+ {%endblock%}
+ {%block css_files%}
+  <link rel= "stylesheet" href="{% static "blog/post-detail.css" %}"/>
+ 
+ {%endblock%}
+ 
+
+  {%block content%}
+   <section id = "summary">
+    <h2> {{post.title}}</h2>
+    <div>
+     {%for tag in post_tags%}
+      <span class = "tag"> {{tag.caption}}</span>
+     {%endfor%}
+    </div>
+    <div id = "read-later">
+        <form action="{%url "read-later"%}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" value= {{post.id}} name= "post_id">
+            <button>
+                {%if savedforlater %}
+                 Remove from "Read Later"
+
+                {%else%}
+                 Read later
+                {%endif%}
+
+            </button>
+        </form>
+    </div>
+    <article>
+     <img src="{{post.image.url}}" alt="{{post.title}}"/>
+     <address>By <a href="mailto:{{post.author.email_adresss}}" > {{post.author}}</a></address>
+     <div> last updated on {{post.date}}</div>
+    </article>
+   </section>
+   <main>
+    <p> {{post.content}}.</p>
+   </main>
+   <section id= "comment-form">
+     <h2>Your Comment  </h2>
+     <form action= "{% url "posts-detail"  post.slug%} " method="POST" >
+        {% csrf_token %}
+       
+        {% for form_field in comment_form %}
+          <div class= "form-control">
+            {{form_field.label_tag}}
+            {{form_field}}
+            {{form_field.errors}}
+          </div>
+        {%endfor%}
+        
+        <button>saveButton</button>
+     </form>
+    </section>
+  {%endblock%}

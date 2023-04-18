@@ -1,0 +1,18 @@
+{% extends "app/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="content-section">
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Calender Event</legend>
+            {% if user.is_authenticated %}
+                event_title: {{ event.title }} <br>
+                event_description: {{ event.description }} <br>
+            {% else %}
+                Login to see event details.
+            {% endif %}
+        </fieldset>
+    </form>
+</div>
+{% endblock %}

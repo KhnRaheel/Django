@@ -1,0 +1,9 @@
+h1,h2{
+    color: white;
+    text-align: center;
+    font-size: 1rem;
+}
+.fallback{
+    text-align: center;
+    color:white;
+}
